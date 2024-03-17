@@ -25,7 +25,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Search based on issue title
-        uses: brob/algolia-issue-search@1.0
+        uses: brob/algolia-issue-search@v1.0
         with:
           app_id: ${{ secrets.ALGOLIA_APP_ID }}
           api_key: ${{ secrets.ALGOLIA_API_KEY }}

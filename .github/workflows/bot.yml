@@ -8,8 +8,19 @@ jobs:
   ingestJob:
     runs-on: ubuntu-latest
     steps:
-      - name: hello world
-        run: echo "hello World"
+      - name: Adding Algolia Record
+        uses: chuckmeyer/add-algolia-record@v0
+        with:
+          app_id: ${{ secrets.ALGOLIA_APP_ID }}
+          api_key: ${{ secrets.ALGOLIA_API_KEY }}
+          index_name: ${{ github.event.repository.name }}
+          record: |
+            {
+              "title": "${{ github.event.issue.title }}", 
+              "url": "${{ github.event.issue.html_url }}", 
+              "labels": "${{ github.event.issue.labels }}",
+              "objectID": "${{ github.event.issue.number }}"
+            }
   relatedSearch:
     runs-on: ubuntu-latest
     steps:

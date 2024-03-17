@@ -5,19 +5,18 @@ on:
     types: [opened]
 
 jobs:
-  validate-body:
+  ingestJob:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-      - name: Install dependencies
-        run: npm install
-      - name: Build project
-        run: npm run build
-
-      - uses: actions/github-script@v7
-        with:
-          github-token: ${{secrets.Token}}
-          script: |
-            const issueBody = context.issue.body;
-            import { parseBody } from './dist/template-check.js';
-            parseBody(issueBody);
+      - name: hello world
+        run: echo "hello World"
+  relatedSearch:
+    runs-on: ubuntu-latest
+    steps:
+      - name: hello world
+        run: echo "hello World"
+  commentIssue:
+    runs-on: ubuntu-latest
+    steps:
+      - name: hello world
+        run: echo "hello World"

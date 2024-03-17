@@ -21,18 +21,26 @@ jobs:
               "labels": "${{ github.event.issue.labels }}",
               "objectID": "${{ github.event.issue.number }}"
             }
+
   relatedSearch:
     runs-on: ubuntu-latest
+    needs: ingestJob
+    outputs:
+      comment_body: ${{ steps.one.outputs.comment_body }}
+
     steps:
-      - name: Search based on issue title
+      - id: one
+        name: Search based on issue title
         uses: brob/algolia-issue-search@v1.0
         with:
           app_id: ${{ secrets.ALGOLIA_APP_ID }}
           api_key: ${{ secrets.ALGOLIA_API_KEY }}
           index_name: ${{ github.event.repository.name }}
           issue_title: ${{ github.event.issue.title }}
+
   commentIssue:
     runs-on: ubuntu-latest
+    needs: relatedSearch
     permissions:
       issues: write
     steps:
@@ -40,5 +48,5 @@ jobs:
         uses: peter-evans/create-or-update-comment@v1.4.5
         with:
           token: ${{ github.token }}
-          issue-number: ${{github.event.issue.number}}
-          body: "Add this comment"
+          issue-number: ${{ github.event.issue.number }}
+          body: ${{ needs.relatedSearch.outputs.comment_body }}

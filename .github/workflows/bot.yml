@@ -7,6 +7,7 @@ on:
 jobs:
   ingestJob:
     runs-on: ubuntu-latest
+    needs: commentIssue
     steps:
       - name: Adding Algolia Record
         uses: chuckmeyer/add-algolia-record@v0
@@ -24,7 +25,7 @@ jobs:
 
   relatedSearch:
     runs-on: ubuntu-latest
-    needs: ingestJob
+    # needs: ingestJob
     outputs:
       comment_body: ${{ steps.one.outputs.comment_body }}
 

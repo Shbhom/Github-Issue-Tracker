@@ -17,6 +17,12 @@ jobs:
         run: echo "hello World"
   commentIssue:
     runs-on: ubuntu-latest
+    permissions:
+      issues: write
     steps:
-      - name: hello world
-        run: echo "hello World"
+      - name: Create or update comment
+        uses: peter-evans/create-or-update-comment@v1.4.5
+        with:
+          token: ${{ github.token }}
+          issue-number: ${{github.event.issue.number}}
+          body: "Add this comment"

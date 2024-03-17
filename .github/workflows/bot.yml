@@ -19,4 +19,5 @@ jobs:
           github-token: ${{secrets.Token}}
           script: |
             const issueBody = context.issue.body;
-            require('./dist/template-check.js')(issueBody)
+            import { parseBody } from './dist/template-check.js';
+            parseBody(issueBody);

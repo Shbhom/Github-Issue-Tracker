@@ -14,7 +14,7 @@ jobs:
 
       - uses: actions/github-script@v7
         with:
-          github-token: ${{secrets.Github-Token}}
+          github-token: ${{secrets.Token}}
           script: |
             const issueBody = context.issue.body;
             require('./dist/template-check.js')(issueBody)

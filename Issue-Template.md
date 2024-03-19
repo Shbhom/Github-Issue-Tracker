@@ -1,5 +1,3 @@
-# Template:
-
 #### Issue
 
     Briefly describe the issue you're encountering.

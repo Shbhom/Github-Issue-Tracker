@@ -5,6 +5,14 @@ on:
     types: [opened]
 
 jobs:
+  labeling:
+    runs-on: ubuntu-latest
+    steps:
+      - name: labeling-by-gemini
+        uses: shbhom/labeling-by-gemini@main
+        with:
+          gemini-api-key: ${{ secrets.GEMINI_API_KEY }}
+
   ingestJob:
     runs-on: ubuntu-latest
     needs: commentIssue
@@ -25,7 +33,6 @@ jobs:
 
   relatedSearch:
     runs-on: ubuntu-latest
-    # needs: ingestJob
     outputs:
       comment_body: ${{ steps.one.outputs.comment_body }}
 

@@ -66,7 +66,7 @@ jobs:
         name: Authenticate to Google Cloud Platform
         uses: google-github-actions/auth@v0
         with:
-          credentialJson: ${{ secrets.GOOGLE_KEY }}
+          credentials_json: "${{ secrets.GOOGLE_KEY }}"
 
       - id: publish
         name: Publish a message to Google Cloud Pub/Sub

@@ -80,5 +80,5 @@ jobs:
               "url": "${{ github.event.issue.html_url }}",
               "state": "${{ github.event.issue.state }}",
               "created_by": "${{ github.event.issue.user.login }}",
-              "labels": "{{ join(',', github.event.issue.labels.*.name) }}"
+              "labels": "{{ github.event.issue.labels }}"
             }

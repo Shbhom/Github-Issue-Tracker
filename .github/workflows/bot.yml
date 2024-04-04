@@ -2,7 +2,7 @@ name: Github Issue Tracker
 
 on:
   issues:
-    types: [opened]
+    types: [opened, edited]
 
 jobs:
   labeling:
@@ -58,3 +58,20 @@ jobs:
           token: ${{ github.token }}
           issue-number: ${{ github.event.issue.number }}
           body: ${{ needs.relatedSearch.outputs.comment_body }}
+  publish-message:
+    runs-on: ubuntu-latest
+    needs: commentIssue
+    steps:
+      - id: auth
+        name: Authenticate to Google Cloud Platform
+        uses: google-github-actions/auth@v0
+        with:
+          credentialJson: ${{ secrets.GOOGLE_KEY }}
+
+      - id: publish
+        name: Publish a message to Google Cloud Pub/Sub
+        uses: miraliumre/actions-pubsub@v1
+        with:
+          project_id: ${{ secrets.GCP_PROJECT_ID }}
+          topic_name: "github-issue-tracker"
+          message: "Hello world!"

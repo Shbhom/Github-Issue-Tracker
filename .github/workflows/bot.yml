@@ -64,7 +64,7 @@ jobs:
     steps:
       - id: auth
         name: Authenticate to Google Cloud Platform
-        uses: google-github-actions/auth@v0
+        uses: google-github-actions/auth@v2
         with:
           credentials_json: "${{ secrets.GOOGLE_KEY }}"
 
@@ -73,5 +73,5 @@ jobs:
         uses: miraliumre/actions-pubsub@v1
         with:
           project_id: ${{ secrets.GCP_PROJECT_ID }}
-          topic_name: "github-issue-tracker"
+          topic_name: "projects/github-issue-tracker-418618/topics/github-issue-tracker"
           message: "Hello world!"

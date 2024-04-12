@@ -60,7 +60,7 @@ jobs:
           body: ${{ needs.relatedSearch.outputs.comment_body }}
   publish-message:
     runs-on: ubuntu-latest
-    needs: commentIssue
+    needs: ingestJob
     steps:
       - id: auth
         name: Authenticate to Google Cloud Platform
